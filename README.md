@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # weather_buddy
 
 Application made to get weather updates
@@ -14,3 +15,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# Weather-Buddy
+A Weather  application build using Flutter
+>>>>>>> b0ce4f8a52c5dfed10b1bb4091345b9927c06fe8
