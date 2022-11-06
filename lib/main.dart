@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:weather_buddy/Models/weather_data_model.dart';
 import 'package:weather_buddy/controller/location_controller.dart';
 
 import 'views/home_page.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
+  MyApp({super.key});
 
   final String title = 'Weather Buddy';
 
