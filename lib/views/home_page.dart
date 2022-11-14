@@ -31,9 +31,11 @@ class _HomePageState extends State<HomePage> {
           return ListView.builder(
               itemCount: 1,
               itemBuilder: (BuildContext context, int index) {
-                return Column(children: [
-                  Text(weatherController.weatherData!.location!.country!
-                      .toString()),
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children:
+                    [
+                      Text(weatherController.weatherData!.location!.country!.toString()),
                 ]);
               });
         } else {

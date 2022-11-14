@@ -9,7 +9,7 @@ import 'package:weather_buddy/Models/weather_data_model.dart';
 class WeatherApiService {
   var client = http.Client();
 
-  Future<WeatherDataModel>? fetchApi() async {
+  Future<WeatherDataModel>? fetchApi({required String weatherQuery}) async {
     var response =
         await client.get(Uri.parse(baseURL + query), headers: header);
 
