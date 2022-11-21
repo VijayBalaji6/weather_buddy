@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_buddy/controller/weather_controller.dart';
+import 'package:weather_buddy/utils/custom_appbar.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
-  late String title;
-
-  HomePage({
-    super.key,
-    required this.title,
-  });
+  HomePage({super.key,});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -21,10 +17,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(widget.title),
-      ),
+      appBar: myAppBar(title: "Weather Buddy"),
       body: GetBuilder<WeatherController>(
         builder: (weatherController) {
         if (weatherController.weatherData != null) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_buddy/Models/weather_data_model.dart';
 import 'package:weather_buddy/controller/location_controller.dart';
+import 'package:weather_buddy/views/splash_screen.dart';
 
 import 'views/home_page.dart';
 
@@ -23,9 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: HomePage(
-        title: title,
-      ),
+      home: SplashScreen()
     );
   }
 }
