@@ -12,4 +12,10 @@ class CommonUtils {
       backgroundColor: Colors.black
       );
   }
+
+  static getChangeTheme(){
+    Get.changeTheme(
+      Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
+    );
+  }
 }

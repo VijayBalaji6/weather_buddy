@@ -11,9 +11,9 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 5),(()async{
+    Future.delayed(const Duration(seconds: 3),(()async{
       if(_locationController.hasLocationPermission==true){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomePage()));
       }
       else{
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const PermissionRequestPage()));
