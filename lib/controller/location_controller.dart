@@ -5,53 +5,69 @@ import 'package:get/get.dart';
 import 'package:weather_buddy/utils/utils.dart';
 
 class LocationController extends GetxController {
-  late bool hasLocationPermission;
+  late bool isLocationServiceEnabled;
 
   LocationPermission? locationPermission;
 
   Position? position;
 
-  void checkLocationPermission() async {
-    hasLocationPermission = await Geolocator.isLocationServiceEnabled();
+  Future<bool> checkLocServiceEnabled() async {
+    isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
 
-    if (!hasLocationPermission) {
+    if (!isLocationServiceEnabled) {
       CommonUtils.getSnackBar(
           title: "Location Permission", message: "Enable Location Service");
       return Future.error('Location services are disabled.');
-    }
-
-    locationPermission = await Geolocator.checkPermission();
-
-    if (locationPermission == LocationPermission.denied) {
-      locationPermission = await Geolocator.requestPermission();
-      if (locationPermission == LocationPermission.denied) {
-        CommonUtils.getSnackBar(
-            title: "Location Permission",
-            message: "Location Permission denied");
-        return Future.error('Location permissions are denied');
-      }
-      if (locationPermission == LocationPermission.deniedForever) {
-        CommonUtils.getSnackBar(
-            title: "Location Permission",
-            message: "Location Permission denied Forever");
-        return Future.error('Location permissions are denied');
-      }
     } else {
-      getUserLocation();
+      CommonUtils.getSnackBar(
+          title: "Location Permission", message: "Location Service Enabled");
     }
+    update();
+    return isLocationServiceEnabled;
+  }
 
+  Future<void> checkLocationPermission() async {
+    bool hasLocServiceOn = await checkLocServiceEnabled();
+
+    if (hasLocServiceOn) {
+      locationPermission = await Geolocator.checkPermission();
+
+      if (locationPermission == LocationPermission.denied) {
+        locationPermission = await Geolocator.requestPermission();
+        if (locationPermission == LocationPermission.denied) {
+          CommonUtils.getSnackBar(
+              title: "Location Permission",
+              message: "Location Permission denied");
+          return Future.error('Location permissions are denied');
+        }
+        if (locationPermission == LocationPermission.deniedForever) {
+          CommonUtils.getSnackBar(
+              title: "Location Permission",
+              message: "Location Permission denied Forever");
+          return Future.error('Location permissions are denied');
+        }
+      } else {
+        getUserLocation();
+      }
+    }
     update();
   }
 
   Future<Position?> getUserLocation() async {
-    position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    log("User location $position");
-    return position;
+    if (locationPermission == null) {
+      await checkLocationPermission();
+    } else {
+      position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      log("User location $position");
+      return position;
+    }
+    return null;
   }
 
   @override
   void onInit() {
+    checkLocServiceEnabled();
     checkLocationPermission();
     // TODO: implement onInit
     super.onInit();
