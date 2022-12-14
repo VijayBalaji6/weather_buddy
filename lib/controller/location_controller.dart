@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:weather_buddy/utils/utils.dart';
