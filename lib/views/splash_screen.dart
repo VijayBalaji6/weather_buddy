@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:weather_buddy/controller/location_controller.dart';
 import 'package:weather_buddy/views/home_page.dart';
 import 'package:weather_buddy/views/permission_request_page.dart';
@@ -23,9 +24,9 @@ class SplashScreen extends StatelessWidget {
             context, MaterialPageRoute(builder: (context) => const HomePage()));
       }
     }));
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text("Loading....."),
+        child: Lottie.asset("assets/animations/weather.json"),
       ),
     );
   }

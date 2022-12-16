@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_buddy/constants/theming.dart';
@@ -12,6 +14,7 @@ class CommonUtils {
   }
 
   static getChangeTheme() {
+    log("change theme called");
     Get.changeTheme(
       Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
     );

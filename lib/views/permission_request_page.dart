@@ -14,7 +14,7 @@ class PermissionRequestPage extends StatelessWidget {
     return GetBuilder<LocationController>(
       builder: (locationController) {
         return Scaffold(
-          appBar: myAppBar(title: 'Permission Request'),
+          appBar: myAppBar(title: 'Permission Request', leadIconAction: () {}),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

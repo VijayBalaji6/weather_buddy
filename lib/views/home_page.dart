@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:weather_buddy/constants/theming.dart';
 import 'package:weather_buddy/controller/weather_controller.dart';
 import 'package:weather_buddy/utils/custom_appbar.dart';
+import 'package:weather_buddy/views/settings.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
@@ -20,7 +22,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(title: "Weather Buddy"),
+      appBar: myAppBar(
+          title: "Weather Buddy",
+          leadIconAction: () {
+            Get.to(const Settings());
+          },
+          leadIcon: Icons.settings),
       backgroundColor: Colors.blue[100],
       body: GetBuilder<WeatherController>(builder: (weatherController) {
         if (weatherController.weatherData != null) {
@@ -39,16 +46,12 @@ class _HomePageState extends State<HomePage> {
                     weatherWidget(
                         temp: weatherData.tempC ?? weatherData.feelslikeC,
                         condition: weatherData.condition!.text!),
-                    Text(weatherData.tempC.toString()),
-                    windDirectionWidget(
-                      windDir: weatherData.windDir.toString(),
-                    ),
                   ]),
                 );
               });
         } else {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: Lottie.asset("assets/animations/weather_loading.json"),
           );
         }
       }),

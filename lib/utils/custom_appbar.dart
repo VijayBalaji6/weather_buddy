@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:weather_buddy/utils/utils.dart';
 
 AppBar myAppBar(
-    {required String title, bool isHome = false, bool needLeading = false}) {
+    {required String title,
+    bool isHome = false,
+    bool needLeading = false,
+    IconData? leadIcon,
+    required VoidCallback leadIconAction}) {
   return AppBar(
     title: Text(
       title,
@@ -27,11 +30,7 @@ AppBar myAppBar(
               ],
             ),
           )
-        : null,
-    actions: [
-      IconButton(onPressed: () {
-        CommonUtils.getChangeTheme();
-      }, icon: const Icon(Icons.shield_moon))
-    ],
+        : const SizedBox(),
+    actions: [IconButton(onPressed: leadIconAction, icon: Icon(leadIcon))],
   );
 }
