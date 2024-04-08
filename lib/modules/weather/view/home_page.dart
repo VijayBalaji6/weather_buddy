@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:weather_buddy/constants/theming.dart';
-import 'package:weather_buddy/controller/weather_controller.dart';
+import 'package:weather_buddy/modules/weather/controller/weather_controller.dart';
+import 'package:weather_buddy/models/weather_data_model.dart';
 import 'package:weather_buddy/utils/custom_appbar.dart';
-import 'package:weather_buddy/views/settings.dart';
+import 'package:weather_buddy/modules/settings/settings.dart';
 
-// ignore: must_be_immutable
 class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final WeatherController _weatherController = Get.put(WeatherController());
+  final WeatherController _weatherController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -29,40 +29,54 @@ class _HomePageState extends State<HomePage> {
           },
           leadIcon: Icons.settings),
       backgroundColor: Colors.blue[100],
-      body: GetBuilder<WeatherController>(builder: (weatherController) {
-        if (weatherController.weatherData != null) {
-          return ListView.builder(
-              itemCount: 1,
-              itemBuilder: (BuildContext context, int index) {
-                var locationData = weatherController.weatherData!.location!;
-                var weatherData = weatherController.weatherData!.current!;
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(children: [
-                    locationDetails(
-                        region: locationData.region!,
-                        country: locationData.country!,
-                        area: locationData.name!),
-                    weatherWidget(
-                        temp: weatherData.tempC ?? weatherData.feelslikeC,
-                        condition: weatherData.condition!.text!),
-                  ]),
-                );
-              });
-        } else {
-          return Center(
-            child: Lottie.asset("assets/animations/weather_loading.json"),
-          );
-        }
-      }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _weatherController.getDataFromAPI();
+      body: GetBuilder<WeatherController>(
+        builder: (weatherController) {
+          if (weatherController.isLocationServiceEnabled == false) {
+            return const Center(
+              child: Text("Turn on location service"),
+            );
+          } else if (weatherController.locationPermission ==
+                  LocationPermission.deniedForever &&
+              weatherController.locationPermission ==
+                  LocationPermission.deniedForever &&
+              weatherController.locationPermission ==
+                  LocationPermission.unableToDetermine) {
+            return Center(
+              child: ElevatedButton(
+                  onPressed: () {
+                    _weatherController.requestLocationPermisssion();
+                  },
+                  child: const Text("Turn on location service")),
+            );
+          } else {
+            if (_weatherController.weatherData != null) {
+              return weatherBuddyUI(_weatherController.weatherData!);
+            } else {
+              return SizedBox();
+            }
+          }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
         child: const Icon(Icons.cloud),
       ),
     );
   }
+}
+
+Column weatherBuddyUI(WeatherDataModel userWeatherData) {
+  final locationData = userWeatherData.location;
+  final weatherData = userWeatherData.current;
+  return Column(children: [
+    locationDetails(
+        region: locationData!.region!,
+        country: locationData.country!,
+        area: locationData.name!),
+    weatherWidget(
+        temp: weatherData!.tempC ?? weatherData.feelslikeC,
+        condition: weatherData.condition!.text!),
+  ]);
 }
 
 Widget locationDetails(
