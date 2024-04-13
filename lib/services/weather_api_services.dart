@@ -15,8 +15,11 @@ class WeatherApiService {
     //String query = "?q=48.8567%2C2.3508";
     try {
       var response =
-          await client.get(Uri.parse(baseURL + locationData), headers: header);
-      print(response);
+          await client.get(Uri.parse(ApiConstants.baseURL + locationData), headers: {
+            "X-RapidAPI-Key": ApiConstants.apiKey,
+            "X-RapidAPI-Host": ApiConstants.hostUrl
+          });
+
       switch (response.statusCode) {
         case 200:
           return WeatherDataModel.fromJson(json.decode(response.body));

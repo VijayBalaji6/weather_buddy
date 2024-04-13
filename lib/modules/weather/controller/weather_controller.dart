@@ -28,7 +28,7 @@ class WeatherController extends GetxController {
     update();
   }
 
-  checkLocPermissionType() {
+void  checkLocPermissionType() {
     switch (locationPermission) {
       case LocationPermission.denied:
         CommonUtils.getSnackBar(
