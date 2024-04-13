@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:weather_buddy/utils/custom_appbar.dart';
 import 'package:weather_buddy/utils/utils.dart';
 
-class Settings extends StatelessWidget {
-  const Settings({Key? key}) : super(key: key);
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[500],
-        appBar: myAppBar(
-            title: 'Settings', leadIconAction: () {}, leadIcon: Icons.home),
+        appBar: MyAppBar(
+          title: 'Settings',
+          leadIconAction: () {},
+          leadIcon: Icons.home,
+          needLeadingIcon: true,
+        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -28,16 +28,16 @@ class WeatherController extends GetxController {
     update();
   }
 
-void  checkLocPermissionType() {
+  void checkLocPermissionType() {
     switch (locationPermission) {
       case LocationPermission.denied:
         CommonUtils.getSnackBar(
-            title: "Location Permission",
+            snackBarTitle: "Location Permission",
             message: "Location Permission denied Forever");
         break;
       case LocationPermission.deniedForever:
         CommonUtils.getSnackBar(
-            title: "Location Permission",
+            snackBarTitle: "Location Permission",
             message: "Location Permission denied Forever");
         break;
       case LocationPermission.whileInUse:
@@ -48,12 +48,12 @@ void  checkLocPermissionType() {
         break;
       case LocationPermission.unableToDetermine:
         CommonUtils.getSnackBar(
-            title: "Location Permission",
+            snackBarTitle: "Location Permission",
             message: "Location Permission Unable to determine");
         break;
       default:
         CommonUtils.getSnackBar(
-            title: "Location Permission",
+            snackBarTitle: "Location Permission",
             message: "Location Permission Unable to determine");
         break;
     }
@@ -68,11 +68,13 @@ void  checkLocPermissionType() {
 
     if (!isLocationServiceEnabled) {
       CommonUtils.getSnackBar(
-          title: "Location Permission", message: "Enable Location Service");
+          snackBarTitle: "Location Permission",
+          message: "Enable Location Service");
       return Future.error('Location services are disabled.');
     } else {
       CommonUtils.getSnackBar(
-          title: "Location Permission", message: "Location Service Enabled");
+          snackBarTitle: "Location Permission",
+          message: "Location Service Enabled");
     }
     update();
     return isLocationServiceEnabled;

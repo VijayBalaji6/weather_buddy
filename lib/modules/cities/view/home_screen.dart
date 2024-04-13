@@ -1,33 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:weather_buddy/constants/theming.dart';
-import 'package:weather_buddy/modules/weather/controller/weather_controller.dart';
+import 'package:weather_buddy/constants/colors.dart';
 import 'package:weather_buddy/models/weather_data_model.dart';
+import 'package:weather_buddy/modules/cities/controller/weather_controller.dart';
+import 'package:weather_buddy/modules/settings/settings_screen.dart';
 import 'package:weather_buddy/utils/custom_appbar.dart';
-import 'package:weather_buddy/modules/settings/settings.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({
+class CitiesScreen extends StatefulWidget {
+  const CitiesScreen({
     super.key,
   });
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<CitiesScreen> createState() => _CitiesScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _CitiesScreenState extends State<CitiesScreen> {
   final WeatherController _weatherController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(
-          title: "Weather Buddy",
-          leadIconAction: () {
-            Get.to(const Settings());
-          },
-          leadIcon: Icons.settings),
+      appBar: MyAppBar(
+        title: "Weather Buddy",
+        leadIconAction: () {
+          Get.to(const SettingsScreen());
+        },
+        leadIcon: Icons.settings,
+        needLeadingIcon: false,
+      ),
       backgroundColor: Colors.blue[100],
       body: GetBuilder<WeatherController>(
         builder: (weatherController) {
@@ -52,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             if (_weatherController.weatherData != null) {
               return weatherBuddyUI(_weatherController.weatherData!);
             } else {
-              return SizedBox();
+              return const SizedBox();
             }
           }
         },
@@ -89,7 +91,7 @@ Widget locationDetails(
           const Icon(
             Icons.location_on,
             size: 20,
-            color: constBlack,
+            color: AppColor.black,
           ),
           const SizedBox(
             width: 10,
@@ -139,13 +141,13 @@ IconData getConditionIcon({required String condition}) {
 }
 
 Widget windDirectionWidget({required String windDir}) {
-  return Column(
+  return const Column(
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Icon(Icons.north_west),
           Icon(Icons.north),
           Icon(Icons.north_east_rounded),
@@ -153,7 +155,7 @@ Widget windDirectionWidget({required String windDir}) {
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Icon(Icons.west),
           Icon(Icons.ac_unit),
           Icon(Icons.east),
@@ -161,7 +163,7 @@ Widget windDirectionWidget({required String windDir}) {
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Icon(Icons.south_west_rounded),
           Icon(Icons.south),
           Icon(Icons.south_east_rounded),
