@@ -3,21 +3,21 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:weather_buddy/constants/colors.dart';
 import 'package:weather_buddy/models/weather_data_model.dart';
-import 'package:weather_buddy/modules/cities/controller/weather_controller.dart';
+import 'package:weather_buddy/modules/home_city/weather_controller.dart';
 import 'package:weather_buddy/modules/settings/settings_screen.dart';
 import 'package:weather_buddy/utils/custom_appbar.dart';
 
-class CitiesScreen extends StatefulWidget {
-  const CitiesScreen({
+class HomeCityScreen extends StatefulWidget {
+  const HomeCityScreen({
     super.key,
   });
 
   @override
-  State<CitiesScreen> createState() => _CitiesScreenState();
+  State<HomeCityScreen> createState() => _HomeCityScreenState();
 }
 
-class _CitiesScreenState extends State<CitiesScreen> {
-  final WeatherController _weatherController = Get.find();
+class _HomeCityScreenState extends State<HomeCityScreen> {
+  final HomeCityWeatherController _weatherController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _CitiesScreenState extends State<CitiesScreen> {
         needLeadingIcon: false,
       ),
       backgroundColor: Colors.blue[100],
-      body: GetBuilder<WeatherController>(
+      body: GetBuilder<HomeCityWeatherController>(
         builder: (weatherController) {
           if (weatherController.isLocationServiceEnabled == false) {
             return const Center(

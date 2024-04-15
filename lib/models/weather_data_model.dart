@@ -122,7 +122,6 @@ class Current {
   Current.fromJson(Map<String, dynamic> json) {
     lastUpdatedEpoch = json['last_updated_epoch'];
     lastUpdated = json['last_updated'];
-    num tempC = json['temp_c'];
     tempF = json['temp_f'];
     isDay = json['is_day'];
     condition = json['condition'] != null

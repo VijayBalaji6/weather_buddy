@@ -16,7 +16,8 @@ dependencies:
   get: 
   geolocator:
   lottie: 
-  http: 
+  dio: 
+  sqflite:
 
 dev_dependencies:
   flutter_test:

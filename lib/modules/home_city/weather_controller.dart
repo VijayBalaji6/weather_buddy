@@ -6,7 +6,7 @@ import 'package:weather_buddy/models/weather_data_model.dart';
 import 'package:weather_buddy/services/weather_api_services.dart';
 import 'package:weather_buddy/utils/utils.dart';
 
-class WeatherController extends GetxController {
+class HomeCityWeatherController extends GetxController {
   LocationPermission? locationPermission;
 
   late bool isLocationServiceEnabled;
