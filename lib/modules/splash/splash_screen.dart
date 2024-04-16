@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:weather_buddy/modules/home/view/home_screen.dart';
+import 'package:weather_buddy/routes/app_routes.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), (() async {
-      Get.to(const HomeScreen());
+      Get.toNamed(AppRoutes.homeScreen);
     }));
     return Scaffold(
       body: Center(

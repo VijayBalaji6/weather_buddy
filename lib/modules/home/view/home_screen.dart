@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_buddy/modules/home/view/home_body.dart';
+import 'package:weather_buddy/modules/home/view/home_body_view.dart';
 import 'package:weather_buddy/modules/home/view/home_bottom_bar.dart';
 
 class HomeScreen extends StatelessWidget {
