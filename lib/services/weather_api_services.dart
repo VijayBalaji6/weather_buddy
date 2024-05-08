@@ -1,11 +1,10 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:weather_buddy/Models/weather_data_model.dart';
 import 'package:weather_buddy/constants/api_keys.dart';
+import 'package:weather_buddy/models/weather_data_model.dart';
 
 class WeatherApiService extends GetxService {
   final Dio client = Dio(
@@ -20,7 +19,7 @@ class WeatherApiService extends GetxService {
     ),
   );
 
-  Future<WeatherDataModel?> fetchApi(Position location) async {
+  Future<WeatherDataModel> fetchWeatherApi(Position location) async {
     String locationData = "?q=${location.latitude}%2C${location.longitude}";
     //String query = "?q=48.8567%2C2.3508";
     try {
@@ -28,10 +27,9 @@ class WeatherApiService extends GetxService {
 
       switch (response.statusCode) {
         case 200:
-          return WeatherDataModel.fromJson(json.decode(response.data));
-
+          return WeatherDataModel.fromJson(response.data);
         default:
-          return null;
+          throw Exception('error');
       }
     } on SocketException catch (_) {
       rethrow;

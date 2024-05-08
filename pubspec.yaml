@@ -13,11 +13,11 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: 
+  flutter_screenutil:
   get: 
-  geolocator:
-  lottie: 
   dio: 
   sqflite:
+  geolocator:
 
 dev_dependencies:
   flutter_test:

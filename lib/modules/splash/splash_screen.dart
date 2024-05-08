@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:weather_buddy/routes/app_routes.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -9,12 +8,10 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), (() async {
-      Get.toNamed(AppRoutes.homeScreen);
+      Get.offNamed(AppRoutes.homeScreen);
     }));
-    return Scaffold(
-      body: Center(
-        child: Lottie.asset("assets/animations/weather.json"),
-      ),
+    return const Scaffold(
+      body: Center(child: CircularProgressIndicator()),
     );
   }
 }
