@@ -1,15 +1,14 @@
-class WeatherDataModel {
+class CurrentWeather {
   Location? location;
   Current? current;
 
-  WeatherDataModel({this.location, this.current});
+  CurrentWeather({this.location, this.current});
 
-  WeatherDataModel.fromJson(Map<String, dynamic> json) {
-    location = json['location'] != null
-        ? Location.fromJson(json['location'])
-        : null;
+  CurrentWeather.fromJson(Map<String, dynamic> json) {
+    location =
+        json['location'] != null ? Location.fromJson(json['location']) : null;
     current =
-    json['current'] != null ? Current.fromJson(json['current']) : null;
+        json['current'] != null ? Current.fromJson(json['current']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -36,13 +35,13 @@ class Location {
 
   Location(
       {this.name,
-        this.region,
-        this.country,
-        this.lat,
-        this.lon,
-        this.tzId,
-        this.localtimeEpoch,
-        this.localtime});
+      this.region,
+      this.country,
+      this.lat,
+      this.lon,
+      this.tzId,
+      this.localtimeEpoch,
+      this.localtime});
 
   Location.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -70,58 +69,61 @@ class Location {
 }
 
 class Current {
-  num ? lastUpdatedEpoch;
+  int? lastUpdatedEpoch;
   String? lastUpdated;
-  num ? tempC;
-  num ? tempF;
-  num ? isDay;
+  double? tempC;
+  double? tempF;
+  int? isDay;
   Condition? condition;
-  num ? windMph;
-  num ? windKph;
-  num ? windDegree;
+  double? windMph;
+  double? windKph;
+  int? windDegree;
   String? windDir;
-  num ? pressureMb;
-  num ? pressureIn;
-  num ? precipMm;
-  num ? precipIn;
-  num ? humidity;
-  num ? cloud;
-  num ? feelslikeC;
-  num ? feelslikeF;
-  num ? visKm;
-  num ? visMiles;
-  num ? uv;
-  num ? gustMph;
-  num ? gustKph;
+  double? pressureMb;
+  double? pressureIn;
+  double? precipMm;
+  double? precipIn;
+  int? humidity;
+  int? cloud;
+  double? feelslikeC;
+  double? feelslikeF;
+  double? visKm;
+  double? visMiles;
+  double? uv;
+  double? gustMph;
+  double? gustKph;
+  AirQuality? airQuality;
 
   Current(
       {this.lastUpdatedEpoch,
-        this.lastUpdated,
-        this.tempC,
-        this.tempF,
-        this.isDay,
-        this.condition,
-        this.windMph,
-        this.windKph,
-        this.windDegree,
-        this.windDir,
-        this.pressureMb,
-        this.pressureIn,
-        this.precipMm,
-        this.precipIn,
-        this.humidity,
-        this.cloud,
-        this.feelslikeC,
-        this.feelslikeF,
-        this.visKm,
-        this.visMiles,
-        this.uv,
-        this.gustMph,
-        this.gustKph});
+      this.lastUpdated,
+      this.tempC,
+      this.tempF,
+      this.isDay,
+      this.condition,
+      this.windMph,
+      this.windKph,
+      this.windDegree,
+      this.windDir,
+      this.pressureMb,
+      this.pressureIn,
+      this.precipMm,
+      this.precipIn,
+      this.humidity,
+      this.cloud,
+      this.feelslikeC,
+      this.feelslikeF,
+      this.visKm,
+      this.visMiles,
+      this.uv,
+      this.gustMph,
+      this.gustKph,
+      this.airQuality});
 
   Current.fromJson(Map<String, dynamic> json) {
     lastUpdatedEpoch = json['last_updated_epoch'];
     lastUpdated = json['last_updated'];
+    tempC = json['temp_c'];
     tempF = json['temp_f'];
     isDay = json['is_day'];
     condition = json['condition'] != null
@@ -144,6 +146,9 @@ class Current {
     uv = json['uv'];
     gustMph = json['gust_mph'];
     gustKph = json['gust_kph'];
+    airQuality = json['air_quality'] != null
+        ? AirQuality.fromJson(json['air_quality'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -173,6 +178,9 @@ class Current {
     data['uv'] = uv;
     data['gust_mph'] = gustMph;
     data['gust_kph'] = gustKph;
+    if (airQuality != null) {
+      data['air_quality'] = airQuality!.toJson();
+    }
     return data;
   }
 }
@@ -195,6 +203,51 @@ class Condition {
     data['text'] = text;
     data['icon'] = icon;
     data['code'] = code;
+    return data;
+  }
+}
+
+class AirQuality {
+  double? co;
+  double? no2;
+  double? o3;
+  int? so2;
+  double? pm25;
+  int? pm10;
+  int? usEpaIndex;
+  int? gbDefraIndex;
+
+  AirQuality(
+      {this.co,
+      this.no2,
+      this.o3,
+      this.so2,
+      this.pm25,
+      this.pm10,
+      this.usEpaIndex,
+      this.gbDefraIndex});
+
+  AirQuality.fromJson(Map<String, dynamic> json) {
+    co = json['co'];
+    no2 = json['no2'];
+    o3 = json['o3'];
+    so2 = json['so2'];
+    pm25 = json['pm2_5'];
+    pm10 = json['pm10'];
+    usEpaIndex = json['us-epa-index'];
+    gbDefraIndex = json['gb-defra-index'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['co'] = co;
+    data['no2'] = no2;
+    data['o3'] = o3;
+    data['so2'] = so2;
+    data['pm2_5'] = pm25;
+    data['pm10'] = pm10;
+    data['us-epa-index'] = usEpaIndex;
+    data['gb-defra-index'] = gbDefraIndex;
     return data;
   }
 }

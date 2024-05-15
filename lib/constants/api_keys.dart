@@ -1,5 +1,10 @@
-class ApiConstants{
-  static const String baseURL = "https://weatherapi-com.p.rapidapi.com/current.json";
-  static const String hostUrl = "weatherapi-com.p.rapidapi.com";
-  static const String apiKey = "830cb1d0e2msh2bc80e25a0aed3fp1cdf28jsn0a07b0d2bdb1";
+class ApiConstants {
+  static const String baseURL = "https://api.weatherapi.com/v1";
+
+  static const String apiKey = "a6754da9c6354af9aad120114240905";
+
+  static const String currentUrl = "/current.json";
+  static const String forecastUrl = "/forecast.json";
+  static const String futureUrl = "/future.json";
+  static const String locationSearchUrl = "/search.json";
 }

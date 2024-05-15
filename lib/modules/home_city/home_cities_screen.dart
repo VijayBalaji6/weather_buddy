@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_buddy/constants/api_response.dart';
-import 'package:weather_buddy/models/weather_data_model.dart';
+import 'package:weather_buddy/models/current_weather.dart';
 import 'package:weather_buddy/modules/home_city/home_cities_controller.dart';
 
 class HomeCityScreen extends StatelessWidget {
@@ -14,7 +14,7 @@ class HomeCityScreen extends StatelessWidget {
     return Scaffold(
       body: GetBuilder<HomeCityWeatherController>(
         builder: (weatherController) {
-          final ApiResponse<WeatherDataModel> userWeatherData =
+          final ApiResponse<CurrentWeather> userWeatherData =
               weatherController.userWeatherData;
           switch (userWeatherData.status) {
             case Status.completed:
@@ -34,9 +34,9 @@ class HomeCityScreen extends StatelessWidget {
   }
 }
 
-Widget weatherUI(WeatherDataModel userWeatherData) {
-  final Location locationData = userWeatherData.location!;
-  final Current weatherData = userWeatherData.current!;
+Widget weatherUI(CurrentWeather userCurrentWeatherData) {
+  final Location locationData = userCurrentWeatherData.location!;
+  final Current weatherData = userCurrentWeatherData.current!;
   return ClipRRect(
     borderRadius: BorderRadius.circular(10),
     child: Card(

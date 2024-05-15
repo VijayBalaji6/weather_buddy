@@ -5,6 +5,7 @@ import 'package:weather_buddy/modules/home/home_controller.dart';
 import 'package:weather_buddy/modules/home_city/home_cities_controller.dart';
 import 'package:weather_buddy/modules/home_city/home_cities_screen.dart';
 import 'package:weather_buddy/modules/settings/settings_screen.dart';
+import 'package:weather_buddy/services/weather_api_services.dart';
 import 'package:weather_buddy/utils/custom_appbar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -34,7 +35,11 @@ class HomeScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      const CircleAvatar(
+                        child: Icon(Icons.menu),
+                      ),
                       Switch.adaptive(
                           value: controller.isLightTheme,
                           onChanged: (bool isLightTheme) =>
@@ -48,7 +53,7 @@ class HomeScreen extends StatelessWidget {
           );
         }),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => _homeCityWeatherController.getDataFromAPI(),
+          onPressed: () => WeatherApiService().fetchCitiesApi('600097'),
           child: const Icon(Icons.cloud),
         ));
   }
