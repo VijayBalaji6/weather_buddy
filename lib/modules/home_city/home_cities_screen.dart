@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_buddy/constants/api_response.dart';
-import 'package:weather_buddy/models/current_weather.dart';
+import 'package:weather_buddy/models/weather_model.dart';
 import 'package:weather_buddy/modules/home_city/home_cities_controller.dart';
 
 class HomeCityScreen extends StatelessWidget {
@@ -14,7 +14,7 @@ class HomeCityScreen extends StatelessWidget {
     return Scaffold(
       body: GetBuilder<HomeCityWeatherController>(
         builder: (weatherController) {
-          final ApiResponse<CurrentWeather> userWeatherData =
+          final ApiResponse<WeatherModel> userWeatherData =
               weatherController.userWeatherData;
           switch (userWeatherData.status) {
             case Status.completed:
@@ -34,9 +34,9 @@ class HomeCityScreen extends StatelessWidget {
   }
 }
 
-Widget weatherUI(CurrentWeather userCurrentWeatherData) {
-  final Location locationData = userCurrentWeatherData.location!;
-  final Current weatherData = userCurrentWeatherData.current!;
+Widget weatherUI(WeatherModel userCurrentWeatherData) {
+  // final Location locationData = userCurrentWeatherData.!;
+  // final Current weatherData = userCurrentWeatherData.current!;
   return ClipRRect(
     borderRadius: BorderRadius.circular(10),
     child: Card(
@@ -54,8 +54,7 @@ Widget weatherUI(CurrentWeather userCurrentWeatherData) {
                   Icons.sunny,
                   size: 50,
                 ),
-                Text("${weatherData.tempC ?? weatherData.feelslikeC}",
-                    style: _weatherTextStyle()),
+                Text("123", style: _weatherTextStyle()),
               ],
             ),
             Row(
@@ -66,8 +65,7 @@ Widget weatherUI(CurrentWeather userCurrentWeatherData) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(locationData.name!,
-                        style: _weatherTextStyle(fontSize: 20)),
+                    Text("123", style: _weatherTextStyle(fontSize: 20)),
                     Text("Today", style: _weatherTextStyle(fontSize: 20)),
                   ],
                 ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_buddy/utils/custom_appbar.dart';
+import 'package:weather_buddy/widgets/custom_appbar.dart';
 import 'package:weather_buddy/utils/utils.dart';
 
 class SettingsScreen extends StatelessWidget {

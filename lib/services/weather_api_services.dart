@@ -4,8 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:weather_buddy/constants/api_keys.dart';
-import 'package:weather_buddy/models/current_weather.dart';
-import 'package:weather_buddy/models/location.dart';
+import 'package:weather_buddy/models/weather_model.dart';
 
 class WeatherApiService extends GetxService {
   final Dio dio = Dio(BaseOptions(
@@ -18,17 +17,18 @@ class WeatherApiService extends GetxService {
     },
   ));
 
-  Future<CurrentWeather> fetchWeatherApi(Position location) async {
+  Future<WeatherModel> fetchWeatherApi(Position location) async {
     try {
-      Response response = await dio.get(ApiConstants.currentUrl,
-          queryParameters: {
-            'key': ApiConstants.apiKey,
-            'q': '${location.latitude},${location.longitude}'
-          });
+      Response response =
+          await dio.get(ApiConstants.currentUrl, queryParameters: {
+        'appid': ApiConstants.apiKey,
+        'lat': '${location.latitude}',
+        'lon': "${location.longitude}",
+      });
 
       switch (response.statusCode) {
         case 200:
-          return CurrentWeather.fromJson(response.data);
+          return WeatherModel.fromJson(response.data);
         default:
           throw Exception('error');
       }
@@ -39,21 +39,21 @@ class WeatherApiService extends GetxService {
     }
   }
 
-  Future<City> fetchCitiesApi(String name) async {
-    try {
-      Response response = await dio.get(ApiConstants.currentUrl,
-          queryParameters: {'key': ApiConstants.apiKey, 'q': name});
+  // Future<City> fetchCitiesApi(String name) async {
+  //   try {
+  //     Response response = await dio.get(ApiConstants.currentUrl,
+  //         queryParameters: {'key': ApiConstants.apiKey, 'q': name});
 
-      switch (response.statusCode) {
-        case 200:
-          return City.fromJson(response.data);
-        default:
-          throw Exception('error');
-      }
-    } on SocketException catch (_) {
-      rethrow;
-    } catch (e) {
-      rethrow;
-    }
-  }
+  //     switch (response.statusCode) {
+  //       case 200:
+  //         return City.fromJson(response.data);
+  //       default:
+  //         throw Exception('error');
+  //     }
+  //   } on SocketException catch (_) {
+  //     rethrow;
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 }

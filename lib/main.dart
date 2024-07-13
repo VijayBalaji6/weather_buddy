@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:weather_buddy/constants/theme.dart';
 import 'package:weather_buddy/modules/home/home_binding.dart';
 import 'package:weather_buddy/modules/splash/splash_screen.dart';
 import 'package:weather_buddy/routes/routes.dart';
@@ -27,7 +26,6 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
-        theme: ThemeColor().themeData,
         home: const SplashScreen(),
         initialBinding: HomeBinding(),
         getPages: AppPages.pages,

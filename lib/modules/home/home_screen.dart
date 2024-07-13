@@ -5,13 +5,12 @@ import 'package:weather_buddy/modules/home/home_controller.dart';
 import 'package:weather_buddy/modules/home_city/home_cities_controller.dart';
 import 'package:weather_buddy/modules/home_city/home_cities_screen.dart';
 import 'package:weather_buddy/modules/settings/settings_screen.dart';
-import 'package:weather_buddy/services/weather_api_services.dart';
-import 'package:weather_buddy/utils/custom_appbar.dart';
+import 'package:weather_buddy/widgets/custom_appbar.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final HomeCityWeatherController _homeCityWeatherController = Get.find();
+  final HomeCityWeatherController homeCityWeatherController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +52,9 @@ class HomeScreen extends StatelessWidget {
           );
         }),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => WeatherApiService().fetchCitiesApi('600097'),
+          onPressed: () {
+            homeCityWeatherController.getDataFromAPI();
+          },
           child: const Icon(Icons.cloud),
         ));
   }
