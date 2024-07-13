@@ -7,4 +7,5 @@ class ApiConstants {
   static const String forecastUrl = "/forecast.json";
   static const String futureUrl = "/future.json";
   static const String locationSearchUrl = "/search.json";
+  //new
 }
